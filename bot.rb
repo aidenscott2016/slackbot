@@ -3,6 +3,10 @@ require 'chat-adapter'
 # also use the local HerokuSlackbot class defined in heroku.rb
 require './heroku'
 
+require 'net/http'
+
+require 'uri'
+
 # if we're on our local machine, we want to test our bot via shell, but when on
 # heroku, deploy the actual slackbot.
 # 
@@ -24,6 +28,12 @@ bot.on_message do |message, info|
     next # don't process the next lines in this block
   end
 
+  botname, announcement = message.split(': ', 2)
+  uri = URI.parse("http://21230bab.ngrok.io/Office/say/#{announcement}/Geraint/60/")
+  Net::HTTP.get_response(uri)
+  
+
+
   # Conditionally send a direct message to the person saying whisper
   if message == 'echobot: whisper'
     # log some info - useful when something doesn't work as expected
@@ -33,11 +43,10 @@ bot.on_message do |message, info|
   end
 
   # split the message in 2 to get what was actually said.
-  botname, command = message.split(': ', 2)
-
+  
   # answer the query!
   # this bot simply echoes the message back
-  "@#{info[:user]}: #{command}"
+  "@#{info[:user]}: saying  #{announcement}"
 end
 
 # actually start the bot
