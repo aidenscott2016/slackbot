@@ -25,7 +25,7 @@ log = ChatAdapter.log
 bot.on_message do |message, info|
   # ignore all messages not directed to this bot
   if message.start_with? 'voice'
-    botname, announcement = message.split(': ', 2)
+    commandname, announcement = message.split(': ', 2)
   elsif message.include? 'php fatal errors'
     if message.include? 'secure_error_log'
       announcement = 'Emergency! Emergency! Fatal error detected on secure'
@@ -33,12 +33,17 @@ bot.on_message do |message, info|
       announcement = 'Oops... Not to worry too much, but an error was detected on test'
     elsif message.include? 'demo_error_log'
       announcement = 'Excuse me, but I have detected an error on demo'
+    elsif message.include? 'staging_error_log'
+      announcement = 'We do not care, but I just found an error on staging. You can ignore me'
     else
       announcement = 'I apologise, but I need to make you aware that I have detected an error but I do not know what it is'
     end
   end
 
-  "@#{info[:user]}: saying  #{announcement}"
+  if commandname == 'voice'
+    "@#{info[:user]}: saying  #{announcement}"
+  end
+
   uri = URI.parse("http://21230bab.ngrok.io/Office/say/#{URI.escape(announcement)}/Brian/60")
   Net::HTTP.get_response(uri)
   
