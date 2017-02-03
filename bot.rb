@@ -61,7 +61,7 @@ bot.on_message do |message, info|
   
   # answer the query!
   # this bot simply echoes the message back
-  "@#{info[:user]}: saying  #{announcement}"
+  # "@#{info[:user]}: saying  #{announcement}"
 end
 
 # actually start the bot
