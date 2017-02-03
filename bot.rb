@@ -20,7 +20,7 @@ log = ChatAdapter.log
 # Do this thing in this block each time the bot hears a message:
 bot.on_message do |message, info|
   # ignore all messages not directed to this bot
-  unless message.start_with? 'echobot: '
+  unless message.start_with? 'voice'
     next # don't process the next lines in this block
   end
 
