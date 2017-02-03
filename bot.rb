@@ -27,20 +27,21 @@ bot.on_message do |message, info|
   if message.start_with? 'voice'
     command, announcement = message.split(': ', 2)
   elsif message.include? 'php fatal errors'
+    command = 'error'
     if message.include? 'secure_error_log'
-      command = 'secure_error_log'
+      errorlocation = 'secure_error_log'
       announcement = 'Emergency! Emergency! Fatal error detected on secure'
     elsif message.include? 'test_error_log'
-      command = 'test_error_log'
+      errorlocation = 'test_error_log'
       announcement = 'Oops... Not to worry too much, but an error was detected on test'
     elsif message.include? 'demo_error_log'
-      command = 'demo_error_log'
+      errorlocation = 'demo_error_log'
       announcement = 'Excuse me, but I have detected an error on demo'
     elsif message.include? 'staging_error_log'
-      command = 'staging_error_log'
+      errorlocation = 'staging_error_log'
       announcement = 'We do not care, but I just found an error on staging. You can ignore me'
     else
-      command = 'unknown'
+      errorlocation = 'unknown'
       announcement = 'I apologise, but I need to make you aware that I have detected an error but I do not know what it is'
     end
   end
@@ -51,7 +52,10 @@ bot.on_message do |message, info|
 
   #uri = URI.parse("http://21230bab.ngrok.io/Office/say/#{URI.escape(announcement)}/Brian/60")
 
-  uri = URI.parse("http://21230bab.ngrok.io/command/announcement")
+  if command == 'error'
+    uri = URI.parse("http://21230bab.ngrok.io/command/errorlocation/announcement")
+  else
+    uri = URI.parse("http://21230bab.ngrok.io/command/announcement")
   Net::HTTP.get_response(uri)
   
 
