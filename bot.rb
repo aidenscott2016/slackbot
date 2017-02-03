@@ -29,7 +29,7 @@ bot.on_message do |message, info|
   end
 
   botname, announcement = message.split(': ', 2)
-  uri = URI.parse("http://21230bab.ngrok.io/Office/say/#{announcement}/Geraint/60/")
+  uri = URI.parse("http://21230bab.ngrok.io/Office/say/#{URI.escape(announcement)}/Geraint/")
   Net::HTTP.get_response(uri)
   
 
