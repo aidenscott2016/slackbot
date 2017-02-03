@@ -53,9 +53,9 @@ bot.on_message do |message, info|
   #uri = URI.parse("http://21230bab.ngrok.io/Office/say/#{URI.escape(announcement)}/Brian/60")
 
   if command == 'error'
-    uri = URI.parse("http://21230bab.ngrok.io/command/errorlocation/announcement")
+    uri = URI.parse("http://21230bab.ngrok.io/#{command}/#{errorlocation}/#{URI.escape(announcement)}")
   else
-    uri = URI.parse("http://21230bab.ngrok.io/command/announcement")
+    uri = URI.parse("http://21230bab.ngrok.io/#{command}/#{URI.escape(announcement)}")
   Net::HTTP.get_response(uri)
   
 
