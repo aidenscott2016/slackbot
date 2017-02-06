@@ -44,7 +44,7 @@ bot.on_message do |message, info|
     "@#{info[:user]}: saying  #{announcement}"
   end
 
-  uri = URI.parse("http://21230bab.ngrok.io/Office/say/#{URI.escape(announcement)}/Brian/60")
+  uri = URI.parse("x http://44d192ba.ngrok.io/Office/say/#{URI.escape(announcement)}/Brian/60")
   Net::HTTP.get_response(uri)
   
 
