@@ -48,17 +48,17 @@ bot.on_message do |message, info|
   #end
 
   if command == 'voice'
+    uri = URI.parse("http://6c56750d.ngrok.io/Office/say/#{URI.escape(announcement)}/Brian/60")
+    Net::HTTP.get_response(uri)
     "@#{info[:user]}: saying  #{announcement}"
   end
 
-  #uri = URI.parse("http://6c56750d.ngrok.io/Office/say/#{URI.escape(announcement)}/Brian/60")
 
-  if command == 'error'
-    uri = URI.parse("http://6c56750d.ngrok.io/#{command}/#{errorlocation}/#{URI.escape(announcement)}")
-  else
-    uri = URI.parse("http://6c56750d.ngrok.io/#{command}/#{URI.escape(announcement)}")
-  end
-  Net::HTTP.get_response(uri)
+  #if command == 'error'
+   # uri = URI.parse("http://6c56750d.ngrok.io/#{command}/#{errorlocation}/#{URI.escape(announcement)}")
+#  else
+ #   uri = URI.parse("http://6c56750d.ngrok.io/#{command}/#{URI.escape(announcement)}")
+  #end
   
 
 
