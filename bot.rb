@@ -47,7 +47,9 @@ bot.on_message do |message, info|
   end
 
 
-  Unirest.post(uri)
+  Unirest.get(uri) { | response |
+  }
+  
   "@#{info[:user]}: saying  #{announcement}"
 end
 
